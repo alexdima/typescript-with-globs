@@ -1,5 +1,5 @@
 # TypeScript with globs
-Simple utility that understands [glob patterns](https://github.com/isaacs/node-glob) and can generate `tsconfig.json` files that list all files the TypeScript compiler shoud use.
+Simple utility that understands [glob patterns](https://github.com/isaacs/node-glob) in `tsconfig.json`.
 
 > Friends don't let friends maintain lists of files.
 
@@ -11,8 +11,8 @@ npm install typescript-with-globs
 ```
 
 ## Using
-Take your existing `tsconfig.json` and rename it to `tsgconfig.json` (note the extra g in the name). Add a new property called `filesGlob` where you can use glob patterns: 
-e.g. `tsgconfig.json`:
+Add a new property called `filesGlob` where you can use glob patterns: 
+e.g. `tsconfig.json`:
 ```
 {
     "compilerOptions": {
@@ -28,12 +28,21 @@ e.g. `tsgconfig.json`:
 }
 ```
 
-Instead of `tsc`, run `tscg` (note the extra g in the name). This first generates `tsconfig.json` files in the `cwd` and parent directories and then invokes `tsc` with the same arguments.
+Instead of `tsc`, run `tscg` (note the extra g in the name). This first updates `tsconfig.json` with the found files and then invokes `tsc` with the same arguments.
 
-The `files` property is generated with all the filenames the glob has found. e.g. resulting `tsconfig.json`:
+The `files` property is generated with all the filenames the glob has found. e.g. updated `tsconfig.json`:
 ```
 {
-  "_comment": "Do not edit directly. This is a generated file from tscgconfig.json. See https://github.com/Microsoft/TypeScript/issues/1927.",
+  "compilerOptions": {
+    "module": "amd",
+    "outDir": "out",
+    "target": "es5"
+  },
+  "filesGlob": [
+    "src/*.ts",
+    "lib/*.d.ts",
+    "node_modules/monaco-editor-core/monaco.d.ts"
+  ],
   "files": [
     "src/languageFeatures.ts",
     "src/mode.ts",
@@ -45,16 +54,6 @@ The `files` property is generated with all the filenames the glob has found. e.g
     "lib/lib-es6-ts.d.ts",
     "lib/lib-ts.d.ts",
     "lib/typescriptServices.d.ts",
-    "node_modules/monaco-editor-core/monaco.d.ts"
-  ],
-  "compilerOptions": {
-    "module": "amd",
-    "outDir": "out",
-    "target": "es5"
-  },
-  "filesGlob": [
-    "src/*.ts",
-    "lib/*.d.ts",
     "node_modules/monaco-editor-core/monaco.d.ts"
   ]
 }
