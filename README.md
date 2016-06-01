@@ -11,7 +11,7 @@ npm install typescript-with-globs
 ```
 
 ## Using
-Take your existing `tsconfig.json` and rename it to `tsgconfig.json` (note the extra g in the name). Add a new property called `include` where you can use glob patterns: 
+Take your existing `tsconfig.json` and rename it to `tsgconfig.json` (note the extra g in the name). Add a new property called `filesGlob` where you can use glob patterns: 
 e.g. `tsgconfig.json`:
 ```
 {
@@ -20,7 +20,7 @@ e.g. `tsgconfig.json`:
         "outDir": "out",
         "target": "es5"
     },
-    "include": [
+    "filesGlob": [
         "src/*.ts",
         "lib/*.d.ts",
         "node_modules/monaco-editor-core/monaco.d.ts"
@@ -52,7 +52,7 @@ The `files` property is generated with all the filenames the glob has found. e.g
     "outDir": "out",
     "target": "es5"
   },
-  "include": [
+  "filesGlob": [
     "src/*.ts",
     "lib/*.d.ts",
     "node_modules/monaco-editor-core/monaco.d.ts"
